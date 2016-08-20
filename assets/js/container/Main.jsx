@@ -9,6 +9,22 @@ export default class Main extends Component {
     this.state = {
       width: null
     }
+    this.windowChange = this.windowChange.bind(this);
+    this.windowChange();
+  }
+
+  componentDidUpdate() {
+    console.log('test')
+    window.addEventListener('resize', () => console.log('関数'))
+  }
+
+  windowChange() {
+    console.log(window.innerWidth)
+    const windowSize = window.innerWidth;
+    const check = windowSize > 100
+    if (windowSize > 768) {
+      this.setState({})
+    }
   }
 
   render() {
