@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import imgPath from '../data/imgPath';
+import s from '../data/style';
+import uuid from 'node-uuid';
 
 export default class Main extends Component {
   constructor(props) {
@@ -9,40 +12,20 @@ export default class Main extends Component {
   }
 
   render() {
-    const s = {
-      header: {
-        textAlign: 'center',
-        background: '#E91E63',
-        padding: '1rem',
-        color: '#FFF',
-        fontSize: '1.2rem'
-      },
-      container: {
-        display: 'flex',
-        margin: '0 auot',
-        boxSizing: 'border-box',
-        flexDirection: 'row',
-        flexWrap: 'wrap'
-      },
-      gridBox: {
-        boxSizing: 'border-box',
-        maxWidth: '33.33333%',
-        flexBasis: '33.33333%',
-        padding: '1rem'
-      }
-    }
+    const imageList = imgPath.map((img, i) => {
+      return (
+        <div style={s.gridBox} key={uuid.v4()}>
+          <div style={s.imgBox}>
+            <img src={img.path} style={s.imgStyle} />
+          </div>
+        </div>
+      )
+    })
     return (
       <main>
         <header style={s.header}>window width/</header>
         <section style={s.container}>
-          <div style={s.gridBox}>
-            <div style={{padding: '1rem', borderRadius: '1rem', border: '1px solid #CCC'}}>テスト</div>
-          </div>
-          <div style={s.gridBox}>テスト</div>
-          <div style={s.gridBox}>テスト</div>
-          <div style={s.gridBox}>テスト</div>
-          <div style={s.gridBox}>テスト</div>
-          <div style={s.gridBox}>テスト</div>
+          {imageList}
         </section>
       </main>
     )
