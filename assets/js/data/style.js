@@ -13,17 +13,23 @@ const s = {
     flexDirection: 'row',
     flexWrap: 'wrap'
   },
-  gridBox: {
+  gridBox_Pc: {
     boxSizing: 'border-box',
     maxWidth: '33.33333%',
     flexBasis: '33.33333%',
+    padding: '1rem'
+  },
+  gridBox_Mobile: {
+    boxSizing: 'border-box',
+    maxWidth: '100%',
+    flexBasis: '100%',
     padding: '1rem'
   },
   imgBox: {
     padding: '1rem'
   },
   imgStyle: {
-    maxWidth: '100%',
+    width: '100%',
     height: 'auto',
     borderRadius: '1rem',
     border: '1px solid #CCC'

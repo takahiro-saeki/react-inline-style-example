@@ -7,39 +7,59 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: null
+      width: null,
+      check: false
     }
-    this.windowChange = this.windowChange.bind(this);
-    this.windowChange();
+    this.initialSetting = this.initialSetting.bind(this);
+    this.windowChange()
   }
 
-  componentDidUpdate() {
-    console.log('test')
-    window.addEventListener('resize', () => console.log('関数'))
+  componentWillUpdate() {
+    this.windowChange()
+  }
+
+  componentDidMount() {
+    this.initialSetting();
+  }
+
+  initialSetting() {
+    const windowSize = window.innerWidth;
+    const check = windowSize > 100
+    if (windowSize === this.state.width) {
+      return false;
+    } else {
+      if (windowSize > 768) {
+        this.setState({
+          check: true,
+          width: windowSize
+        })
+      } else if (windowSize < 768) {
+        this.setState({
+          check: false,
+          width: windowSize
+        })
+      }
+    }
   }
 
   windowChange() {
-    console.log(window.innerWidth)
-    const windowSize = window.innerWidth;
-    const check = windowSize > 100
-    if (windowSize > 768) {
-      this.setState({})
-    }
+    window.addEventListener('resize', () => this.initialSetting())
   }
 
   render() {
     const imageList = imgPath.map((img, i) => {
       return (
-        <div style={s.gridBox} key={uuid.v4()}>
+        <div style={this.state.check ? s.gridBox_Pc : s.gridBox_Mobile} key={uuid.v4()}>
           <div style={s.imgBox}>
             <img src={img.path} style={s.imgStyle} />
           </div>
         </div>
       )
     })
+
     return (
       <main>
-        <header style={s.header}>window width/</header>
+        <header style={s.header}>window width/{this.state.width}</header>
         <section style={s.container}>
           {imageList}
         </section>
